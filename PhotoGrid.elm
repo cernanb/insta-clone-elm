@@ -20,14 +20,20 @@ photoView photo =
         [ img [ src photo.url ] [] ]
 
 
+photoGridView : List Photo -> Html Msg
+photoGridView photos =
+    div [ class "photo-grid" ]
+        (map photoView photos)
+
+
+model : { photos : List { commentCount : number, comments : List Types.Comment, likeCount : number1, location : String, url : String, username : String } }
 model =
     { photos = repeat 12 examplePhoto }
 
 
 view : Model -> Html Msg
 view model =
-    div [ class "photo-grid" ]
-        (map photoView model.photos)
+    photoGridView model.photos
 
 
 update msg model =
